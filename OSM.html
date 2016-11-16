@@ -1,0 +1,37 @@
+<html>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+	<style>#mapid { height:300px; }</style>
+	<body>
+		<div id="mapid"></div>
+		<div><label>Latitude:</label><input type="text" id="Latitude"/></div>
+		<div><label>Longitude:</label><input type="text" id="Longitude"/></div>
+		<button type="button" onclick="ResetMarker()">Submit</button>
+	</body>
+	<script>
+		var mymap = L.map('mapid').setView([12.91588, 77.6356], 18);
+		
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'mapbox.streets'
+		}).addTo(mymap);
+		
+		var marker = L.marker([12.91588, 77.6356]).addTo(mymap);
+		
+		marker.bindPopup("<b>Hello!</b><br>You are here.");
+		
+		function ResetMarker()
+		{
+			var Lat = document.getElementById("Latitude").value;
+			var Long = document.getElementById("Longitude").value;
+			
+			var latLng = L.latLng(parseFloat(Lat),parseFloat(Long));
+			marker = marker.setLatLng(latLng);
+			
+			mymap.setView(latLng, 5);
+		}
+	</script>
+</html>
