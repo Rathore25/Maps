@@ -1,7 +1,10 @@
 <html>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+	<link rel="stylesheet" href="leaflet-routing-machine-3.2.4\dist\leaflet-routing-machine.css" />
 	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-	<style>#mapid { height:300px; }</style>
+	<script src="leaflet-routing-machine-3.2.4\dist\leaflet-routing-machine.js"></script>
+	<style>#mapid { height:400px; }</style>
 	<body>
 		<div id="mapid"></div>
 		<div><label>Latitude:</label><input type="text" id="Latitude"/></div>
@@ -23,6 +26,14 @@
 		
 		marker.bindPopup("<b>Hello!</b><br>You are here.");
 		
+		L.Routing.control({
+			waypoints: [
+				L.latLng(12.9585, 77.7057),
+				L.latLng(12.9570, 77.6413),
+				L.latLng(12.9153, 77.6357)
+			]
+		}).addTo(mymap);
+
 		function ResetMarker()
 		{
 			var Lat = document.getElementById("Latitude").value;
